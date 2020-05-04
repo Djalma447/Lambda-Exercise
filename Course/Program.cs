@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Course.Entities;
+using Course.Service;
 
 namespace Course
 {
@@ -16,9 +17,8 @@ namespace Course
             list.Add(new Product("Tablet", 350.50));
             list.Add(new Product("HD Case", 80.90));
 
-            list.RemoveAll(p => p.Name[0] != 'T');
-            double sum = 0.0;
-            list.ForEach(p => sum += p.Price);
+            ProductService ps = new ProductService();
+            double sum = ps.FilteredSum(list, p => p.Name[0] == 'T');
             Console.WriteLine(sum.ToString("F2", CultureInfo.InvariantCulture));
         }
     }
